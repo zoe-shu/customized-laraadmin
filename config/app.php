@@ -148,6 +148,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Dwij\Laraadmin\LAProvider::class,
+        // App\Providers\ComposerServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -204,7 +205,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
-        
+
     ],
 
 ];

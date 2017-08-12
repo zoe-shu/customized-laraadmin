@@ -49,7 +49,7 @@
                       </a>
               </li>
               @endforeach
-              <li><a href="/about">About Us</a></li>
+              <li><a href="/test">Testing page</a></li>
               <li><a href="/admin">Admin</a></li>
             </ul>
         </div>

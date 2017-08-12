@@ -39,7 +39,19 @@
         <div class="container">
             <div class="content">
                 <div class="title">Laravel 5</div>
+                @lang('messages.welcome')
             </div>
+            <ul>
+              @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+              <li>
+                <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    {{ $properties['native'] }}
+                      </a>
+              </li>
+              @endforeach
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/admin">Admin</a></li>
+            </ul>
         </div>
     </body>
 </html>

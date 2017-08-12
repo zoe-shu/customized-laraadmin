@@ -11,6 +11,7 @@ function()
 {
 	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
 	Route::get('/', 'HomeController@index');
+	Route::get('/test', 'TestController@index');
 });
 
 /* ================== Access Uploaded Files ================== */
@@ -78,4 +79,7 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	Route::get(config('laraadmin.adminRoute') . '/backup_dt_ajax', 'LA\BackupsController@dtajax');
 	Route::post(config('laraadmin.adminRoute') . '/create_backup_ajax', 'LA\BackupsController@create_backup_ajax');
 	Route::get(config('laraadmin.adminRoute') . '/downloadBackup/{id}', 'LA\BackupsController@downloadBackup');
+	/* ================== Testings ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/testings', 'LA\TestingsController');
+	Route::get(config('laraadmin.adminRoute') . '/testing_dt_ajax', 'LA\TestingsController@dtajax');
 });

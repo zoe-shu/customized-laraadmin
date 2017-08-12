@@ -12,6 +12,7 @@ function()
 	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
 	Route::get('/', 'HomeController@index');
 	Route::get('/test', 'TestController@index');
+	Route::get('/test/{slug}', 'TestController@detail');
 });
 
 /* ================== Access Uploaded Files ================== */

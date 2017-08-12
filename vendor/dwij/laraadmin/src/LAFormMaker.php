@@ -8,7 +8,7 @@ use Dwij\Laraadmin\Models\ModuleFieldTypes;
 
 class LAFormMaker
 {
-	
+
 	/**
 	* Print input field enclosed within form-group
 	**/
@@ -16,12 +16,12 @@ class LAFormMaker
 	{
 		// Check Field Write Aceess
 		if(Module::hasFieldAccess($module->id, $module->fields[$field_name]['id'], $access_type = "write")) {
-			
+
 			$row = null;
 			if(isset($module->row)) {
 				$row = $module->row;
 			}
-			
+
 			//print_r($module->fields);
 			$label = $module->fields[$field_name]['label'];
 			$field_type = $module->fields[$field_name]['field_type'];
@@ -31,16 +31,16 @@ class LAFormMaker
 			$maxlength = $module->fields[$field_name]['maxlength'];
 			$required = $module->fields[$field_name]['required'];
 			$popup_vals = $module->fields[$field_name]['popup_vals'];
-			
+
 			if($required2 != null) {
 				$required = $required2;
 			}
-			
+
 			$field_type = ModuleFieldTypes::find($field_type);
-			
+
 			$out = '<div class="form-group">';
 			$required_ast = "";
-			
+
 			if(!isset($params['class'])) {
 				$params['class'] = $class;
 			}
@@ -66,16 +66,16 @@ class LAFormMaker
 				}
 				$out .= '<input type="hidden" name="_token_'.$module->fields[$field_name]['id'].'" value="'.csrf_token().'">';
 			}
-			
+
 			if($required && !isset($params['required'])) {
 				$params['required'] = $required;
 				$required_ast = "*";
 			}
-			
+
 			switch ($field_type->name) {
 				case 'Address':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -83,7 +83,7 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					$params['cols'] = 30;
 					$params['rows'] = 3;
 					$out .= Form::textarea($field_name, $default_val, $params);
@@ -91,11 +91,11 @@ class LAFormMaker
 				case 'Checkbox':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
 					$out .= '<input type="hidden" value="false" name="'.$field_name.'_hidden">';
-					
+
 					// ############### Remaining
 					unset($params['placeholder']);
 					unset($params['data-rule-maxlength']);
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -103,13 +103,13 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					$out .= Form::checkbox($field_name, $field_name, $default_val, $params);
 					$out .= '<div class="Switch Round On" style="vertical-align:top;margin-left:10px;"><div class="Toggle"></div></div>';
 					break;
 				case 'Currency':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -117,7 +117,7 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					unset($params['data-rule-maxlength']);
 					$params['data-rule-currency'] = "true";
 					$params['min'] = "0";
@@ -125,7 +125,7 @@ class LAFormMaker
 					break;
 				case 'Date':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -137,10 +137,10 @@ class LAFormMaker
 					if($default_val != "") {
 						$dval = date("d/m/Y", strtotime($default_val));
 					}
-					
+
 					unset($params['data-rule-maxlength']);
 					// $params['data-rule-date'] = "true";
-					
+
 					$out .= "<div class='input-group date'>";
 					$out .= Form::text($field_name, $dval, $params);
 					$out .= "<span class='input-group-addon'><span class='fa fa-calendar'></span></span></div>";
@@ -148,7 +148,7 @@ class LAFormMaker
 					break;
 				case 'Datetime':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -156,7 +156,7 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					// ############### Remaining
 					$dval = $default_val;
 					if($default_val != "") {
@@ -168,7 +168,7 @@ class LAFormMaker
 					break;
 				case 'Decimal':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -176,18 +176,18 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					unset($params['data-rule-maxlength']);
 					$out .= Form::number($field_name, $default_val, $params);
 					break;
 				case 'Dropdown':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					unset($params['data-rule-maxlength']);
 					$params['data-placeholder'] = $params['placeholder'];
 					unset($params['placeholder']);
 					$params['rel'] = "select2";
-					
+
 					//echo $defaultvalue;
 					if($default_val == null) {
 						$default_val = $defaultvalue;
@@ -196,7 +196,7 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					if($popup_vals != "") {
 						$popup_vals = LAFormMaker::process_values($popup_vals);
 					} else {
@@ -206,7 +206,7 @@ class LAFormMaker
 					break;
 				case 'Email':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -214,13 +214,13 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					$params['data-rule-email'] = "true";
 					$out .= Form::email($field_name, $default_val, $params);
 					break;
 				case 'File':
 					$out .= '<label for="'.$field_name.'" style="display:block;">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -247,7 +247,7 @@ class LAFormMaker
 
 				case 'Files':
 					$out .= '<label for="'.$field_name.'" style="display:block;">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -258,9 +258,9 @@ class LAFormMaker
 					if(is_array($default_val)) {
 						$default_val = json_encode($default_val);
 					}
-					
+
 					$default_val_arr = json_decode($default_val);
-					
+
 					if(is_array($default_val_arr) && count($default_val_arr) > 0) {
 						$uploadIds = array();
 						$uploadImages = "";
@@ -277,7 +277,7 @@ class LAFormMaker
 								$uploadImages .= "<a class='uploaded_file2' upload_id='".$upload->id."' target='_blank' href='".url("files/".$upload->hash.DIRECTORY_SEPARATOR.$upload->name)."'>".$fileImage."<i title='Remove File' class='fa fa-times'></i></a>";
 							}
 						}
-						
+
 						$out .= Form::hidden($field_name, json_encode($uploadIds), $params);
 						if(count($uploadIds) > 0) {
 							$out .= "<div class='uploaded_files'>".$uploadImages."</div>";
@@ -291,7 +291,7 @@ class LAFormMaker
 
 				case 'Float':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -299,13 +299,13 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					unset($params['data-rule-maxlength']);
 					$out .= Form::number($field_name, $default_val, $params);
 					break;
 				case 'HTML':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -313,14 +313,18 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					// ############### Remaining
-					$out .= '<div class="htmlbox" id="htmlbox_'.$field_name.'" contenteditable>'.$default_val.'</div>';
-					$out .= Form::hidden($field_name, $default_val, $params);
+					// $out .= '<div class="htmlbox" id="htmlbox_'.$field_name.'" contenteditable>'.$default_val.'</div>';
+					// $out .= Form::hidden($field_name, $default_val, $params);
+					$params['class'] = 'htmlbox ckeditor';
+					$params['id'] = 'htmlbox-wysi';
+					$out .= Form::textarea($field_name, $default_val, $params);
+
 					break;
 				case 'Image':
 					$out .= '<label for="'.$field_name.'" style="display:block;">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -343,11 +347,11 @@ class LAFormMaker
 						$out .= "<a class='btn btn-default btn_upload_image' file_type='image' selecter='".$field_name."'>Upload <i class='fa fa-cloud-upload'></i></a>
 							<div class='uploaded_image hide'><img src=''><i title='Remove Image' class='fa fa-times'></i></div>";
 					}
-					
+
 					break;
 				case 'Integer':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					unset($params['data-rule-maxlength']);
 					if($default_val == null) {
 						$default_val = $defaultvalue;
@@ -361,7 +365,7 @@ class LAFormMaker
 					break;
 				case 'Mobile':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -369,12 +373,12 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					$out .= Form::text($field_name, $default_val, $params);
 					break;
 				case 'Multiselect':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					unset($params['data-rule-maxlength']);
 					$params['data-placeholder'] = "Select multiple ".str_plural($label);
 					unset($params['placeholder']);
@@ -391,7 +395,7 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = json_decode($row->$field_name);
 					}
-					
+
 					if($popup_vals != "") {
 						$popup_vals = LAFormMaker::process_values($popup_vals);
 					} else {
@@ -401,7 +405,7 @@ class LAFormMaker
 					break;
 				case 'Name':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -409,21 +413,21 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					$out .= Form::text($field_name, $default_val, $params);
 					break;
 				case 'Password':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					$out .= Form::password($field_name, $params);
 					break;
 				case 'Radio':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' : </label><br>';
-					
+
 					// ############### Remaining
 					unset($params['placeholder']);
 					unset($params['data-rule-maxlength']);
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -431,7 +435,7 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					if(starts_with($popup_vals, "@")) {
 						$popup_vals = LAFormMaker::process_values($popup_vals);
 						$out .= '<div class="radio">';
@@ -463,7 +467,7 @@ class LAFormMaker
 					}
 				case 'String':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -475,7 +479,7 @@ class LAFormMaker
 					break;
 				case 'Taginput':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if(isset($params['data-rule-maxlength'])) {
 						$params['maximumSelectionLength'] = $params['data-rule-maxlength'];
 						unset($params['data-rule-maxlength']);
@@ -484,12 +488,12 @@ class LAFormMaker
 					$params['rel'] = "taginput";
 					$params['data-placeholder'] = "Add multiple ".str_plural($label);
 					unset($params['placeholder']);
-					
+
 					// Override the edit value
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = json_decode($row->$field_name);
 					}
-					
+
 					if($default_val == null) {
 						$defaultvalue2 = json_decode($defaultvalue);
 						if(is_array($defaultvalue2)) {
@@ -509,10 +513,10 @@ class LAFormMaker
 					break;
 				case 'Textarea':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					$params['cols'] = 30;
 					$params['rows'] = 3;
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -520,12 +524,12 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					$out .= Form::textarea($field_name, $default_val, $params);
 					break;
 				case 'TextField':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -533,12 +537,12 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					$out .= Form::text($field_name, $default_val, $params);
 					break;
 				case 'URL':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
+
 					if($default_val == null) {
 						$default_val = $defaultvalue;
 					}
@@ -546,7 +550,7 @@ class LAFormMaker
 					if(isset($row) && isset($row->$field_name)) {
 						$default_val = $row->$field_name;
 					}
-					
+
 					$params['data-rule-url'] = "true";
 					$out .= Form::text($field_name, $default_val, $params);
 					break;
@@ -557,7 +561,7 @@ class LAFormMaker
 			return "";
 		}
 	}
-	
+
 	/**
 	* Processes the populated values for Multiselect / Taginput / Dropdown
 	* get data from module / table whichever is found if starts with '@'
@@ -567,11 +571,11 @@ class LAFormMaker
 		$out = array();
 		// Check if populated values are from Module or Database Table
 		if(is_string($json) && starts_with($json, "@")) {
-			
+
 			// Get Module / Table Name
 			$json = str_ireplace("@", "", $json);
 			$table_name = strtolower(str_plural($json));
-			
+
 			// Search Module
 			$module = Module::getByTable($table_name);
 			if(isset($module->id)) {
@@ -635,7 +639,7 @@ class LAFormMaker
 		}
 		return $out;
 	}
-	
+
 	/**
 	* Display field using blade directive @la_display
 	**/
@@ -643,22 +647,22 @@ class LAFormMaker
 	{
 		// Check Field View Aceess
 		if(Module::hasFieldAccess($module->id, $module->fields[$field_name]['id'], $access_type = "view")) {
-			
+
 			$fieldObj = $module->fields[$field_name];
 			$label = $module->fields[$field_name]['label'];
 			$field_type = $module->fields[$field_name]['field_type'];
 			$field_type = ModuleFieldTypes::find($field_type);
-			
+
 			$row = null;
 			if(isset($module->row)) {
 				$row = $module->row;
 			}
-			
+
 			$out = '<div class="form-group">';
 			$out .= '<label for="'.$field_name.'" class="col-md-2">'.$label.' :</label>';
-			
+
 			$value = $row->$field_name;
-			
+
 			switch ($field_type->name) {
 				case 'Address':
 					if($value != "") {
@@ -673,7 +677,7 @@ class LAFormMaker
 					}
 					break;
 				case 'Currency':
-					
+
 					break;
 				case 'Date':
 					$dt = strtotime($value);
@@ -684,7 +688,7 @@ class LAFormMaker
 					$value = date("d M Y, h:i A", $dt);
 					break;
 				case 'Decimal':
-					
+
 					break;
 				case 'Dropdown':
 					$values = LAFormMaker::process_values($fieldObj['popup_vals']);
@@ -743,7 +747,7 @@ class LAFormMaker
 					}
 					break;
 				case 'Float':
-					
+
 					break;
 				case 'HTML':
 					break;
@@ -758,7 +762,7 @@ class LAFormMaker
 					}
 					break;
 				case 'Integer':
-					
+
 					break;
 				case 'Mobile':
 					$value = '<a target="_blank" href="tel:'.$value.'">'.$value.'</a>';
@@ -787,16 +791,16 @@ class LAFormMaker
 					$value = $valueOut;
 					break;
 				case 'Name':
-					
+
 					break;
 				case 'Password':
 					$value = '<a href="#" data-toggle="tooltip" data-placement="top" data-container="body" title="Cannot be declassified !!!">********</a>';
 					break;
 				case 'Radio':
-					
+
 					break;
 				case 'String':
-					
+
 					break;
 				case 'Taginput':
 					$valueOut = "";
@@ -825,16 +829,16 @@ class LAFormMaker
 					$value = $valueOut;
 					break;
 				case 'Textarea':
-					
+
 					break;
 				case 'TextField':
-					
+
 					break;
 				case 'URL':
 					$value = '<a target="_blank" href="'.$value.'">'.$value.'</a>';
 					break;
 			}
-			
+
 			$out .= '<div class="col-md-10 fvalue">'.$value.'</div>';
 			$out .= '</div>';
 			return $out;
@@ -842,7 +846,7 @@ class LAFormMaker
 			return "";
 		}
 	}
-	
+
 	/**
 	* Print form using blade directive @la_form
 	**/
@@ -857,7 +861,7 @@ class LAFormMaker
 		}
 		return $out;
 	}
-	
+
 	/**
 	* Check Whether User has Module Access
 	**/
@@ -865,7 +869,7 @@ class LAFormMaker
 	{
 		return Module::hasAccess($module_id, $access_type, $user_id);
 	}
-	
+
 	/**
 	* Check Whether User has Module Field Access
 	**/

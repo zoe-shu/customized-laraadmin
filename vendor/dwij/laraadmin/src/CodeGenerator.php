@@ -22,7 +22,7 @@ class CodeGenerator
 
         LAHelper::log("info", "Creating controller...", $comm);
         $md = file_get_contents($templateDirectory."/controller.stub");
-		
+
         $md = str_replace("__controller_class_name__", $config->controllerName, $md);
         $md = str_replace("__model_name__", $config->modelName, $md);
         $md = str_replace("__module_name__", $config->moduleName, $md);
@@ -137,9 +137,10 @@ class CodeGenerator
 		}
 
 		$contents = file_get_contents($routesFile);
-		$contents = str_replace('});', '', $contents);
+		// $contents = str_replace('});', '', $contents);
+    $contents = substr($contents,0,-4);
 		file_put_contents($routesFile, $contents);
-		
+
         $md = file_get_contents($templateDirectory."/routes.stub");
 
         $md = str_replace("__module_name__", $config->moduleName, $md);
@@ -316,7 +317,7 @@ class CodeGenerator
         $config->controllerName = ucfirst(str_plural($module))."Controller";
         $config->singularVar = strtolower(str_singular($module));
         $config->singularCapitalVar = str_replace('_', ' ', ucfirst(str_singular($module)));
-		
+
         $module = Module::get($config->moduleName);
         if(!isset($module->id)) {
             throw new Exception("Please run 'php artisan migrate' for 'create_".$config->dbTableName."_table' in order to create CRUD.\nOr check if any problem in Module Name '".$config->moduleName."'.", 1);

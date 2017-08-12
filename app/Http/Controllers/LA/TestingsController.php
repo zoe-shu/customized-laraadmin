@@ -23,8 +23,9 @@ class TestingsController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'slug';
-	public $listing_cols = ['id', 'slug', 'address', 'checkbox', 'currency', 'date', 'datetime', 'decimal', 'dropdown', 'email', 'file', 'float', 'html', 'image', 'integer', 'mobile', 'multiselect', 'name', 'password', 'radio', 'string', 'taginput', 'textarea', 'textfield', 'url', 'multi_file'];
-	
+	// public $listing_cols = ['id', 'slug', 'address', 'checkbox', 'currency', 'date', 'datetime', 'decimal', 'dropdown', 'email', 'file', 'float', 'html', 'image', 'integer', 'mobile', 'multiselect', 'name', 'password', 'radio', 'string', 'taginput', 'textarea', 'textfield', 'url', 'multi_file'];
+	public $listing_cols = ['id', 'slug'];
+
 	public function __construct() {
 		// Field Access of Listing Columns
 		if(\Dwij\Laraadmin\Helpers\LAHelper::laravel_ver() == 5.3) {
@@ -36,7 +37,7 @@ class TestingsController extends Controller
 			$this->listing_cols = ModuleFields::listingColumnAccessScan('Testings', $this->listing_cols);
 		}
 	}
-	
+
 	/**
 	 * Display a listing of the Testings.
 	 *
@@ -45,7 +46,7 @@ class TestingsController extends Controller
 	public function index()
 	{
 		$module = Module::get('Testings');
-		
+
 		if(Module::hasAccess($module->id)) {
 			return View('la.testings.index', [
 				'show_actions' => $this->show_action,
@@ -76,19 +77,19 @@ class TestingsController extends Controller
 	public function store(Request $request)
 	{
 		if(Module::hasAccess("Testings", "create")) {
-		
+
 			$rules = Module::validateRules("Testings", $request);
-			
+
 			$validator = Validator::make($request->all(), $rules);
-			
+
 			if ($validator->fails()) {
 				return redirect()->back()->withErrors($validator)->withInput();
 			}
-			
+
 			$insert_id = Module::insert("Testings", $request);
-			
+
 			return redirect()->route(config('laraadmin.adminRoute') . '.testings.index');
-			
+
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
@@ -103,12 +104,12 @@ class TestingsController extends Controller
 	public function show($id)
 	{
 		if(Module::hasAccess("Testings", "view")) {
-			
+
 			$testing = Testing::find($id);
 			if(isset($testing->id)) {
 				$module = Module::get('Testings');
 				$module->row = $testing;
-				
+
 				return view('la.testings.show', [
 					'module' => $module,
 					'view_col' => $this->view_col,
@@ -134,13 +135,13 @@ class TestingsController extends Controller
 	 */
 	public function edit($id)
 	{
-		if(Module::hasAccess("Testings", "edit")) {			
+		if(Module::hasAccess("Testings", "edit")) {
 			$testing = Testing::find($id);
-			if(isset($testing->id)) {	
+			if(isset($testing->id)) {
 				$module = Module::get('Testings');
-				
+
 				$module->row = $testing;
-				
+
 				return view('la.testings.edit', [
 					'module' => $module,
 					'view_col' => $this->view_col,
@@ -166,19 +167,19 @@ class TestingsController extends Controller
 	public function update(Request $request, $id)
 	{
 		if(Module::hasAccess("Testings", "edit")) {
-			
+
 			$rules = Module::validateRules("Testings", $request, true);
-			
+
 			$validator = Validator::make($request->all(), $rules);
-			
+
 			if ($validator->fails()) {
 				return redirect()->back()->withErrors($validator)->withInput();;
 			}
-			
+
 			$insert_id = Module::updateRow("Testings", $request, $id);
-			
+
 			return redirect()->route(config('laraadmin.adminRoute') . '.testings.index');
-			
+
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
@@ -194,14 +195,14 @@ class TestingsController extends Controller
 	{
 		if(Module::hasAccess("Testings", "delete")) {
 			Testing::find($id)->delete();
-			
+
 			// Redirecting to index() method
 			return redirect()->route(config('laraadmin.adminRoute') . '.testings.index');
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
 	}
-	
+
 	/**
 	 * Datatable Ajax fetch
 	 *
@@ -214,9 +215,9 @@ class TestingsController extends Controller
 		$data = $out->getData();
 
 		$fields_popup = ModuleFields::getModuleFields('Testings');
-		
+
 		for($i=0; $i < count($data->data); $i++) {
-			for ($j=0; $j < count($this->listing_cols); $j++) { 
+			for ($j=0; $j < count($this->listing_cols); $j++) {
 				$col = $this->listing_cols[$j];
 				if($fields_popup[$col] != null && starts_with($fields_popup[$col]->popup_vals, "@")) {
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
@@ -228,13 +229,13 @@ class TestingsController extends Controller
 				//    $data->data[$i][$j];
 				// }
 			}
-			
+
 			if($this->show_action) {
 				$output = '';
 				if(Module::hasAccess("Testings", "edit")) {
 					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/testings/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
-				
+
 				if(Module::hasAccess("Testings", "delete")) {
 					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.testings.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';

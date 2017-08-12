@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://lollicms.test:8080'),
+    'url' => env('APP_URL', 'http://initial.test:8080'),
 
     /*
     |--------------------------------------------------------------------------

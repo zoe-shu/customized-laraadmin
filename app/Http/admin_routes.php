@@ -1,6 +1,25 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
+
+// Route::get('/', function () {
+//     return view('home');
+// });
+
+/* ================== Homepage + Admin Routes ================== */
+// require __DIR__.'/admin_routes.php';
 /* ================== Homepage ================== */
+// Route::get('/', 'HomeController@index');
+// Route::get('/home', 'HomeController@index');
 Route::auth();
 Route::group(
 [
@@ -11,10 +30,13 @@ function()
 {
 	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
 	Route::get('/', 'HomeController@index');
-	Route::get('/test', 'TestController@index');
-	Route::get('/test/{slug}', 'TestController@detail');
+	Route::get('/about', 'AboutController@index');
+	Route::get('/services', 'ServiceController@index');
+	Route::get('/contact', 'ContactController@index');
+	Route::get('/projects', 'ProjectController@index');
+	Route::get('/projects/{slug}', 'ProjectDetailController@detail');
+	Route::post('/ajax', 'ProjectController@ajax');
 });
-
 /* ================== Access Uploaded Files ================== */
 Route::get('files/{hash}/{name}', 'LA\UploadsController@get_file');
 
@@ -31,6 +53,7 @@ if(\Dwij\Laraadmin\Helpers\LAHelper::laravel_ver() == 5.3) {
 	// Routes for Laravel 5.3
 	Route::get('/logout', 'Auth\LoginController@logout');
 }
+
 
 Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], function () {
 
@@ -80,7 +103,49 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	Route::get(config('laraadmin.adminRoute') . '/backup_dt_ajax', 'LA\BackupsController@dtajax');
 	Route::post(config('laraadmin.adminRoute') . '/create_backup_ajax', 'LA\BackupsController@create_backup_ajax');
 	Route::get(config('laraadmin.adminRoute') . '/downloadBackup/{id}', 'LA\BackupsController@downloadBackup');
-	/* ================== Testings ================== */
-	Route::resource(config('laraadmin.adminRoute') . '/testings', 'LA\TestingsController');
-	Route::get(config('laraadmin.adminRoute') . '/testing_dt_ajax', 'LA\TestingsController@dtajax');
+
+
+
+	/* ================== Crg_users ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/crg_users', 'LA\Crg_usersController');
+	Route::get(config('laraadmin.adminRoute') . '/crg_user_dt_ajax', 'LA\Crg_usersController@dtajax');
+	/* ================== Agents ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/agents', 'LA\AgentsController');
+	Route::get(config('laraadmin.adminRoute') . '/agent_dt_ajax', 'LA\AgentsController@dtajax');
+	/* ================== Abouts ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/abouts', 'LA\AboutsController');
+	Route::get(config('laraadmin.adminRoute') . '/about_dt_ajax', 'LA\AboutsController@dtajax');
+	/* ================== Services ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/services', 'LA\ServicesController');
+	Route::get(config('laraadmin.adminRoute') . '/service_dt_ajax', 'LA\ServicesController@dtajax');
+	/* ================== Homes ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/homes', 'LA\HomesController');
+	Route::get(config('laraadmin.adminRoute') . '/home_dt_ajax', 'LA\HomesController@dtajax');
+	/* ================== Contacts ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/contacts', 'LA\ContactsController');
+	Route::get(config('laraadmin.adminRoute') . '/contact_dt_ajax', 'LA\ContactsController@dtajax');
+	/* ================== Projects ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/projects', 'LA\ProjectsController');
+	Route::get(config('laraadmin.adminRoute') . '/project_dt_ajax', 'LA\ProjectsController@dtajax');
+	/* ================== Tests ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/tests', 'LA\TestsController');
+	Route::get(config('laraadmin.adminRoute') . '/test_dt_ajax', 'LA\TestsController@dtajax');
+	/* ================== Project_details ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/project_details', 'LA\Project_detailsController');
+	Route::get(config('laraadmin.adminRoute') . '/project_detail_dt_ajax', 'LA\Project_detailsController@dtajax');
+	/* ================== Frontend_menuses ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/frontend_menuses', 'LA\Frontend_menusesController');
+	Route::get(config('laraadmin.adminRoute') . '/frontend_menus_dt_ajax', 'LA\Frontend_menusesController@dtajax');
+	/* ================== Service_details ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/service_details', 'LA\Service_detailsController');
+	Route::get(config('laraadmin.adminRoute') . '/service_detail_dt_ajax', 'LA\Service_detailsController@dtajax');
+	/* ================== Project_prices ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/project_prices', 'LA\Project_pricesController');
+	Route::get(config('laraadmin.adminRoute') . '/project_price_dt_ajax', 'LA\Project_pricesController@dtajax');
+	/* ================== Website_languages ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/website_languages', 'LA\Website_languagesController');
+	Route::get(config('laraadmin.adminRoute') . '/website_language_dt_ajax', 'LA\Website_languagesController@dtajax');
+	/* ================== Project_types ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/project_types', 'LA\Project_typesController');
+	Route::get(config('laraadmin.adminRoute') . '/project_type_dt_ajax', 'LA\Project_typesController@dtajax');
 });

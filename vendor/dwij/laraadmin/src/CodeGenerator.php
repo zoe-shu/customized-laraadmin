@@ -138,7 +138,7 @@ class CodeGenerator
 
 		$contents = file_get_contents($routesFile);
 		// $contents = str_replace('});', '', $contents);
-    $contents = substr($contents,0,-4);
+    $contents = substr($contents,0,-5);
 		file_put_contents($routesFile, $contents);
 
         $md = file_get_contents($templateDirectory."/routes.stub");

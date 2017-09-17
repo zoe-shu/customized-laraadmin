@@ -42,7 +42,7 @@ class AuthController extends Controller
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
-
+    
     public function showRegistrationForm()
     {
         $roleCount = Role::count();
@@ -52,7 +52,6 @@ class AuthController extends Controller
 				return view('auth.register');
 			} else {
 				return redirect('login');
-        // return view('auth.register');
 			}
 		} else {
 			return view('errors.error', [
@@ -61,7 +60,7 @@ class AuthController extends Controller
 			]);
 		}
     }
-
+    
     public function showLoginForm()
     {
 		$roleCount = Role::count();
@@ -105,7 +104,7 @@ class AuthController extends Controller
     {
         // TODO: This is Not Standard. Need to find alternative
         Eloquent::unguard();
-
+        
         $employee = Employee::create([
             'name' => $data['name'],
             'designation' => "Super Admin",
@@ -122,7 +121,7 @@ class AuthController extends Controller
             'date_left' => date("Y-m-d"),
             'salary_cur' => 0,
         ]);
-
+        
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -132,7 +131,7 @@ class AuthController extends Controller
         ]);
         $role = Role::where('name', 'SUPER_ADMIN')->first();
         $user->attachRole($role);
-
+    
         return $user;
     }
 }

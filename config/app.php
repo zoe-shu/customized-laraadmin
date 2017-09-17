@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://crg.test:8080'),
+    'url' => env('APP_URL', 'http://initial.test:8080'),
 
     /*
     |--------------------------------------------------------------------------
@@ -126,7 +126,6 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-         App\Providers\ComposerServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -149,7 +148,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Dwij\Laraadmin\LAProvider::class,
-        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+        // App\Providers\ComposerServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -158,6 +157,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
 
     ],
 

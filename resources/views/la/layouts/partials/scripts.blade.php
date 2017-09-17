@@ -16,8 +16,8 @@
 
 <script src="{{ asset('la-assets/plugins/stickytabs/jquery.stickytabs.js') }}" type="text/javascript"></script>
 <script src="{{ asset('la-assets/plugins/slimScroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('la-assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}" type="text/javascript">></script>
-<script src="{{ asset('la-assets/plugins/ckeditor/ckeditor.js') }}" type="text/javascript">></script>
+<script src="{{ asset('la-assets/plugins/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the

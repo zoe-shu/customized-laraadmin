@@ -17,18 +17,19 @@
 				<div class="col-md-9">
 					<h4 class="name">{{ $permission->$view_col }}</h4>
 					<div class="row stats">
-						<div class="col-md-4"><i class="fa fa-facebook"></i> 234</div>
+						<!-- <div class="col-md-4"><i class="fa fa-facebook"></i> 234</div>
 						<div class="col-md-4"><i class="fa fa-twitter"></i> 12</div>
-						<div class="col-md-4"><i class="fa fa-instagram"></i> 89</div>
+						<div class="col-md-4"><i class="fa fa-instagram"></i> 89</div> -->
+						<!-- <h4 class="name">{{ $permission->$view_col }}</h4> -->
 					</div>
-					<p class="desc">Test Description in one line</p>
+					<!-- <p class="desc">Test Description in one line</p> -->
 				</div>
 			</div>
 		</div>
 		<div class="col-md-3">
-			<div class="dats1"><div class="label2">Admin</div></div>
+			<!-- <div class="dats1"><div class="label2">Admin</div></div>
 			<div class="dats1"><i class="fa fa-envelope-o"></i> superadmin@gmail.com</div>
-			<div class="dats1"><i class="fa fa-map-marker"></i> Pune, India</div>
+			<div class="dats1"><i class="fa fa-map-marker"></i> Pune, India</div> -->
 		</div>
 		<div class="col-md-4">
 			<!--
@@ -46,7 +47,7 @@
 				<a class="face" data-toggle="tooltip" data-placement="top" title="John Doe"><img src="{{ asset('la-assets/img/user7-128x128.jpg') }}" alt=""></a>
 			</div>
 			-->
-			<div class="dats1 pb">
+			<!-- <div class="dats1 pb">
 				<div class="clearfix">
 					<span class="pull-left">Task #1</span>
 					<small class="pull-right">20%</small>
@@ -78,13 +79,13 @@
 						<span class="sr-only">60% Complete</span>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 		<div class="col-md-1 actions">
 			@la_access("Permissions", "edit")
 				<a href="{{ url(config('laraadmin.adminRoute') . '/permissions/'.$permission->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
 			@endla_access
-			
+
 			@la_access("Permissions", "delete")
 				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.permissions.destroy', $permission->id], 'method' => 'delete', 'style'=>'display:inline']) }}
 					<button class="btn btn-default btn-delete btn-xs" type="submit"><i class="fa fa-times"></i></button>
@@ -141,7 +142,7 @@
 									</div>
 								</div>
 							@endforeach
-							
+
 							<div class="form-group">
 								<label for="ratings_innovation" class="col-md-2"></label>
 								<div class="col-md-10 fvalue star_class">

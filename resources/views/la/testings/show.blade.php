@@ -17,18 +17,19 @@
 				<div class="col-md-9">
 					<h4 class="name">{{ $testing->$view_col }}</h4>
 					<div class="row stats">
-						<div class="col-md-4"><i class="fa fa-facebook"></i> 234</div>
+						<!-- <div class="col-md-4"><i class="fa fa-facebook"></i> 234</div>
 						<div class="col-md-4"><i class="fa fa-twitter"></i> 12</div>
-						<div class="col-md-4"><i class="fa fa-instagram"></i> 89</div>
+						<div class="col-md-4"><i class="fa fa-instagram"></i> 89</div> -->
+						<!-- <h4 class="name">{{ $testing->$view_col }}</h4> -->
 					</div>
-					<p class="desc">Test Description in one line</p>
+					<!-- <p class="desc">Test Description in one line</p> -->
 				</div>
 			</div>
 		</div>
 		<div class="col-md-3">
-			<div class="dats1"><div class="label2">Admin</div></div>
+			<!-- <div class="dats1"><div class="label2">Admin</div></div>
 			<div class="dats1"><i class="fa fa-envelope-o"></i> superadmin@gmail.com</div>
-			<div class="dats1"><i class="fa fa-map-marker"></i> Pune, India</div>
+			<div class="dats1"><i class="fa fa-map-marker"></i> Pune, India</div> -->
 		</div>
 		<div class="col-md-4">
 			<!--
@@ -46,7 +47,7 @@
 				<a class="face" data-toggle="tooltip" data-placement="top" title="John Doe"><img src="{{ asset('la-assets/img/user7-128x128.jpg') }}" alt=""></a>
 			</div>
 			-->
-			<div class="dats1 pb">
+			<!-- <div class="dats1 pb">
 				<div class="clearfix">
 					<span class="pull-left">Task #1</span>
 					<small class="pull-right">20%</small>
@@ -78,13 +79,13 @@
 						<span class="sr-only">60% Complete</span>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 		<div class="col-md-1 actions">
 			@la_access("Testings", "edit")
 				<a href="{{ url(config('laraadmin.adminRoute') . '/testings/'.$testing->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
 			@endla_access
-			
+
 			@la_access("Testings", "delete")
 				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.testings.destroy', $testing->id], 'method' => 'delete', 'style'=>'display:inline']) }}
 					<button class="btn btn-default btn-delete btn-xs" type="submit"><i class="fa fa-times"></i></button>
@@ -96,7 +97,7 @@
 	<ul data-toggle="ajax-tab" class="nav nav-tabs profile" role="tablist">
 		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/testings') }}" data-toggle="tooltip" data-placement="right" title="Back to Testings"><i class="fa fa-chevron-left"></i></a></li>
 		<li class="active"><a role="tab" data-toggle="tab" class="active" href="#tab-general-info" data-target="#tab-info"><i class="fa fa-bars"></i> General Info</a></li>
-		<li class=""><a role="tab" data-toggle="tab" href="#tab-timeline" data-target="#tab-timeline"><i class="fa fa-clock-o"></i> Timeline</a></li>
+		<!-- <li class=""><a role="tab" data-toggle="tab" href="#tab-timeline" data-target="#tab-timeline"><i class="fa fa-clock-o"></i> Timeline</a></li> -->
 	</ul>
 
 	<div class="tab-content">
@@ -137,16 +138,16 @@
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane fade in p20 bg-white" id="tab-timeline">
-			<ul class="timeline timeline-inverse">
+			<!-- <ul class="timeline timeline-inverse"> -->
 				<!-- timeline time label -->
-				<li class="time-label">
+				<!-- <li class="time-label">
 					<span class="bg-red">
 						10 Feb. 2014
 					</span>
-				</li>
+				</li> -->
 				<!-- /.timeline-label -->
 				<!-- timeline item -->
-				<li>
+				<!-- <li>
 				<i class="fa fa-envelope bg-blue"></i>
 
 				<div class="timeline-item">
@@ -165,10 +166,10 @@
 					<a class="btn btn-danger btn-xs">Delete</a>
 					</div>
 				</div>
-				</li>
+				</li> -->
 				<!-- END timeline item -->
 				<!-- timeline item -->
-				<li>
+				<!-- <li>
 				<i class="fa fa-user bg-aqua"></i>
 
 				<div class="timeline-item">
@@ -177,10 +178,10 @@
 					<h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
 					</h3>
 				</div>
-				</li>
+				</li> -->
 				<!-- END timeline item -->
 				<!-- timeline item -->
-				<li>
+				<!-- <li>
 				<i class="fa fa-comments bg-yellow"></i>
 
 				<div class="timeline-item">
@@ -197,17 +198,17 @@
 					<a class="btn btn-warning btn-flat btn-xs">View comment</a>
 					</div>
 				</div>
-				</li>
+				</li> -->
 				<!-- END timeline item -->
 				<!-- timeline time label -->
-				<li class="time-label">
+				<!-- <li class="time-label">
 					<span class="bg-green">
 						3 Jan. 2014
 					</span>
-				</li>
+				</li> -->
 				<!-- /.timeline-label -->
 				<!-- timeline item -->
-				<li>
+				<!-- <li>
 				<i class="fa fa-camera bg-purple"></i>
 
 				<div class="timeline-item">
@@ -222,15 +223,15 @@
 					<img src="http://placehold.it/150x100" alt="..." class="margin">
 					</div>
 				</div>
-				</li>
+				</li> -->
 				<!-- END timeline item -->
-				<li>
+				<!-- <li>
 				<i class="fa fa-clock-o bg-gray"></i>
 				</li>
-			</ul>
+			</ul> -->
 			<!--<div class="text-center p30"><i class="fa fa-list-alt" style="font-size: 100px;"></i> <br> No posts to show</div>-->
 		</div>
-		
+
 	</div>
 	</div>
 	</div>

@@ -42,13 +42,13 @@
 				<a class="face" data-toggle="tooltip" data-placement="top" title="John Doe"><img src="{{ asset('la-assets/img/user6-128x128.jpg') }}" alt=""><i class="status-online"></i></a>
 				<a class="face" data-toggle="tooltip" data-placement="top" title="John Doe"><img src="{{ asset('la-assets/img/user7-128x128.jpg') }}" alt=""></a>
 			</div>
-			
+
 		</div>
 		<div class="col-md-1 actions">
 			@la_access("Employees", "edit")
 				<a href="{{ url(config('laraadmin.adminRoute') . '/employees/'.$employee->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
 			@endla_access
-			
+
 			@la_access("Employees", "delete")
 				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.employees.destroy', $employee->id], 'method' => 'delete', 'style'=>'display:inline']) }}
 					<button class="btn btn-default btn-delete btn-xs" type="submit"><i class="fa fa-times"></i></button>
@@ -60,7 +60,7 @@
 	<ul data-toggle="ajax-tab" class="nav nav-tabs profile" role="tablist">
 		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/employees') }}" data-toggle="tooltip" data-placement="right" title="Back to Employees"><i class="fa fa-chevron-left"></i></a></li>
 		<li class="active"><a role="tab" data-toggle="tab" class="active" href="#tab-info" data-target="#tab-info"><i class="fa fa-bars"></i> General Info</a></li>
-		<li class=""><a role="tab" data-toggle="tab" href="#tab-timeline" data-target="#tab-timeline"><i class="fa fa-clock-o"></i> Timeline</a></li>
+		<!-- <li class=""><a role="tab" data-toggle="tab" href="#tab-timeline" data-target="#tab-timeline"><i class="fa fa-clock-o"></i> Timeline</a></li> -->
 		@if($employee->id == Auth::user()->id || Entrust::hasRole("SUPER_ADMIN"))
 			<li class=""><a role="tab" data-toggle="tab" href="#tab-account-settings" data-target="#tab-account-settings"><i class="fa fa-key"></i> Account settings</a></li>
 		@endif
@@ -93,16 +93,16 @@
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane fade in p20 bg-white" id="tab-timeline">
-			<ul class="timeline timeline-inverse">
+			<!-- <ul class="timeline timeline-inverse"> -->
 				<!-- timeline time label -->
-				<li class="time-label">
+				<!-- <li class="time-label">
 					<span class="bg-red">
 						10 Feb. 2014
 					</span>
-				</li>
+				</li> -->
 				<!-- /.timeline-label -->
 				<!-- timeline item -->
-				<li>
+				<!-- <li>
 				<i class="fa fa-envelope bg-blue"></i>
 
 				<div class="timeline-item">
@@ -121,10 +121,10 @@
 					<a class="btn btn-danger btn-xs">Delete</a>
 					</div>
 				</div>
-				</li>
+				</li> -->
 				<!-- END timeline item -->
 				<!-- timeline item -->
-				<li>
+				<!-- <li>
 				<i class="fa fa-user bg-aqua"></i>
 
 				<div class="timeline-item">
@@ -133,10 +133,10 @@
 					<h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
 					</h3>
 				</div>
-				</li>
+				</li> -->
 				<!-- END timeline item -->
 				<!-- timeline item -->
-				<li>
+				<!-- <li>
 				<i class="fa fa-comments bg-yellow"></i>
 
 				<div class="timeline-item">
@@ -153,17 +153,17 @@
 					<a class="btn btn-warning btn-flat btn-xs">View comment</a>
 					</div>
 				</div>
-				</li>
+				</li> -->
 				<!-- END timeline item -->
 				<!-- timeline time label -->
-				<li class="time-label">
+				<!-- <li class="time-label">
 					<span class="bg-green">
 						3 Jan. 2014
 					</span>
-				</li>
+				</li> -->
 				<!-- /.timeline-label -->
 				<!-- timeline item -->
-				<li>
+				<!-- <li>
 				<i class="fa fa-camera bg-purple"></i>
 
 				<div class="timeline-item">
@@ -178,15 +178,15 @@
 					<img src="http://placehold.it/150x100" alt="..." class="margin">
 					</div>
 				</div>
-				</li>
+				</li> -->
 				<!-- END timeline item -->
-				<li>
+				<!-- <li>
 				<i class="fa fa-clock-o bg-gray"></i>
 				</li>
-			</ul>
+			</ul> -->
 			<!--<div class="text-center p30"><i class="fa fa-list-alt" style="font-size: 100px;"></i> <br> No posts to show</div>-->
 		</div>
-		
+
 		@if($employee->id == Auth::user()->id || Entrust::hasRole("SUPER_ADMIN"))
 		<div role="tabpanel" class="tab-pane fade" id="tab-account-settings">
 			<div class="tab-content">
@@ -241,7 +241,7 @@
 $(function () {
 	@if($employee->id == Auth::user()->id || Entrust::hasRole("SUPER_ADMIN"))
 	$('#password-reset-form').validate({
-		
+
 	});
 	@endif
 });
